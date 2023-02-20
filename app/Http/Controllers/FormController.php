@@ -68,7 +68,7 @@ class FormController extends Controller
             $addNew->document = $fileName;
         }
         $addNew->save();
-        return redirect()->route('pages.allInfo')->with('success', 'New Info Added Successfully');
+        return redirect()->route('form.allData')->with('success', 'New Info Added Successfully');
 
     }
 

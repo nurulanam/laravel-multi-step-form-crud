@@ -27,7 +27,6 @@
                                                 value="option">
                                         </div>
                                     </th>
-                                    <th>SL.</th>
                                     <th>Profile</th>
                                     <th>E-mail</th>
                                     <th>Name</th>
@@ -43,7 +42,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($informations as $key => $info)
+                                @foreach ($informations as $info)
                                     <tr>
                                         <th scope="row">
                                             <div class="form-check">
@@ -51,9 +50,9 @@
                                                     value="option1">
                                             </div>
                                         </th>
-                                        <td>{{ $key += 1 }}</td>
                                         <td>
-                                            <img src="{{ asset('assets/images/profileImages'.'/'.$info->profile_image) }}" alt="Profile Image" style="max-height: 60px;">
+                                            <img src="{{ asset('assets/images/profileImages' . '/' . $info->profile_image) }}"
+                                                alt="Profile Image" style="max-height: 60px; max-width:60px;">
                                         </td>
                                         <td>{{ $info->email }}</td>
                                         <td>{{ $info->name }}</td>
@@ -64,7 +63,8 @@
                                         <td>{{ $info->country }}</td>
                                         <td>{{ $info->job_title }}</td>
                                         <td>{{ $info->job_description }}</td>
-                                        <td><a href="{{ asset('assets/documents/'.$info->document) }}" target="_blank">Click here</a></td>
+                                        <td><a href="{{ asset('assets/documents/' . $info->document) }}"
+                                                target="_blank">Click here</a></td>
                                         <td>
                                             <div class="dropdown d-inline-block">
                                                 <button class="btn btn-soft-secondary btn-sm dropdown" type="button"
@@ -73,17 +73,18 @@
                                                 </button>
                                                 <ul class="dropdown-menu dropdown-menu-end">
                                                     <li>
-                                                        <a href="{{ route('form.editdata', $info->id) }}" class="dropdown-item edit-item-btn" >
-                                                            <i
-                                                                class="ri-pencil-fill align-bottom me-2 text-muted">
+                                                        <a href="{{ route('form.editdata', $info->id) }}"
+                                                            class="dropdown-item edit-item-btn">
+                                                            <i class="ri-pencil-fill align-bottom me-2 text-muted">
                                                             </i>
                                                             Edit</a>
-                                                        </li>
+                                                    </li>
                                                     <li>
-                                                        <a class="dropdown-item remove-item-btn" data-bs-toggle="modal" data-bs-target="#delete{{ $info->id }}">
-                                                                <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                                Delete
-                                                            </a>
+                                                        <a class="dropdown-item remove-item-btn" data-bs-toggle="modal"
+                                                            data-bs-target="#delete{{ $info->id }}">
+                                                            <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
+                                                            Delete
+                                                        </a>
 
                                                     </li>
                                                 </ul>
@@ -92,19 +93,24 @@
 
 
                                         <!-- Default Modals -->
-                                        <<div id="delete{{ $info->id }}" class="modal fade" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true" style="display: none;">
+                                        <div id="delete{{ $info->id }}" class="modal fade" tabindex="-1"
+                                            aria-labelledby="deleteModal" aria-hidden="true" style="display: none;">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title text-danger" id="deleteModallabel">Confirmation Message</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                                                        <h5 class="modal-title text-danger" id="deleteModallabel">
+                                                            Confirmation Message</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"> </button>
                                                     </div>
                                                     <div class="modal-body">
                                                         Are Your Sure To Delete?
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                                                        <form action="{{ route('form.destroy', $info->id) }}" method="post">
+                                                        <button type="button" class="btn btn-light"
+                                                            data-bs-dismiss="modal">Cancel</button>
+                                                        <form action="{{ route('form.destroy', $info->id) }}"
+                                                            method="post">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button class="btn btn-danger ">Delete</button>
